@@ -1,8 +1,15 @@
-FROM ruby:2.4.1
+FROM ruby:2.4.2
 
-COPY Gemfile Gemfile
-COPY Gemfile.lock Gemfile.lock
+RUN apt-get update -qq && apt-get install -y build-essential libpq-dev nodejs
+
+WORKDIR /app
+
+ADD Gemfile Gemfile
+ADD Gemfile.lock Gemfile.lock
 RUN bundle install
 
-COPY . .
-ENTRYPOINT ["bundle", "exec", "rails", "server", "3000"]
+ADD . .
+
+EXPOSE 3000
+
+CMD ["bundle", "exec", "rails", "server", "-b", "0.0.0.0"]
