@@ -1,0 +1,4 @@
+steps:
+  - label: Build
+    command: |
+      docker build . -t paulos-kube-test:0.1.0
