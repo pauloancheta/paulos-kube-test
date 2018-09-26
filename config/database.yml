@@ -20,8 +20,11 @@ test:
   database: paulos_kube_test_test
 
 production:
-  <<: *default
-  database: paulos_kube_test_production
-  username: paulos_kube_test
-  password: <%= ENV['DB_PASSWORD'] %>
-
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+  timeout: 5000
+  username: rails_test
+  password: rails_test1234
+  database: paulo_kube_test_production
+  host:   "/cloudsql/rails-203005:australia-southeast1:rails-cloudsql-instance"
