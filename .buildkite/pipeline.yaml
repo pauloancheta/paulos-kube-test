@@ -1,6 +1,4 @@
 plugins: &plugins
-  ecr#v1.1.4:
-    login: true
   unbounce/aws-assume-role#v0.2.0: {}
   unbounce/aws-ssm#v1.0.0:
     parameters:
@@ -19,10 +17,12 @@ steps:
 
   - label: Build
     command: |
-      docker build . -t paulos-kube-test:${BUILDKITE_TAG}
-      docker tag paulos-kube-test:${BUILDKITE_TAG} 894790724410.dkr.ecr.us-west-2.amazonaws.com/paulos-kube-test:${BUILDKITE_TAG}
+      export TAG=$(cat .app_version)
+      make release
+      docker build . -t paulos-kube-test:${TAG}
+      docker tag paulos-kube-test:${TAG} 894790724410.dkr.ecr.us-west-2.amazonaws.com/paulos-kube-test:${TAG}
       docker push 894790724410.dkr.ecr.us-west-2.amazonaws.com/paulos-kube-test
     agents:
-      queue: qa
+      queue: sandbox
     branches: "master"
     plugins: *plugins
