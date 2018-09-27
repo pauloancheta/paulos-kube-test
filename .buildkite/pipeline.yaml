@@ -1,10 +1,10 @@
 plugins: &plugins
+  ecr#v1.1.4:
+    login: true
   unbounce/aws-assume-role#v0.2.0: {}
   unbounce/aws-ssm#v1.0.0:
     parameters:
       AWS_ASSUME_ROLE_ARN: /integration/paulos-kube-test/BuildRoleArn
-      ecr#v1.1.4:
-        login: true
 
 steps:
   - label: Build
