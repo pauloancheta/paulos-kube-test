@@ -3,7 +3,8 @@ steps:
     command: |
       docker build . -t paulos-kube-test:0.1.0
       docker push 894790724410.dkr.ecr.us-west-2.amazonaws.com/paulos-kube-test
-
+    agents:
+      queue: sandbox
     plugins:
       unbounce/aws-assume-role#v0.2.0: {}
       unbounce/aws-ssm#v1.0.0:
