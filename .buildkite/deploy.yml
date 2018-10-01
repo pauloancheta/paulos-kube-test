@@ -1,0 +1,16 @@
+plugins: &plugins
+  unbounce/aws-assume-role#v0.2.0: {}
+  unbounce/aws-ssm#v1.0.0:
+    parameters:
+      AWS_ASSUME_ROLE_ARN: /integration/paulos-kube-test/BuildRoleArn
+
+steps:
+  - label: Deploy
+    command: |
+      echo ${OWNER}
+      echo ${APP_VERSION}
+      echo ${APP_NAME}
+    agents:
+      queue: sandbox
+    branches: "!master !v*"
+    plugins: *plugins
