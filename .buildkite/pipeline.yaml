@@ -14,9 +14,18 @@ steps:
     branches: "!master !v*"
     plugins: *plugins
 
+  - trigger: sandbox-cluster-deploy
+    label: "hello world"
+    branches: "!master !v*"
+    build:
+      env:
+        OWNER: core-tribe
+        APP_NAME: paulos-kube-test
+        APP_VERSION: ${BUILDKITE_COMMIT}
+
   - label: Build QA
     command: |
-      docker build . -t 894790724410.dkr.ecr.us-west-2.amazonaws.com/paulos-kube-test:v0.1.0
+      docker build . -t 894790724410.dkr.ecr.us-west-2.amazonaws.com/paulos-kube-test:${BUILDKITE_TAG}
       docker push 894790724410.dkr.ecr.us-west-2.amazonaws.com/paulos-kube-test
     agents:
       queue: default
