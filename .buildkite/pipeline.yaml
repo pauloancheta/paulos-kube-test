@@ -37,4 +37,4 @@ steps:
     branches: "v*.*.*"
     build:
       env:
-        APP_VERSION: ${BUILDKITE_TAG}
+        APP_VERSION: "${BUILDKITE_TAG}"
