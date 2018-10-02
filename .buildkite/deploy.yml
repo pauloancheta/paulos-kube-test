@@ -5,12 +5,13 @@ plugins: &plugins
       AWS_ASSUME_ROLE_ARN: /integration/paulos-kube-test/BuildRoleArn
 
 steps:
-  - label: Deploy
-    command: |
-      echo ${OWNER}
-      echo ${APP_VERSION}
-      echo ${APP_NAME}
-    agents:
-      queue: sandbox
-    branches: "!master !v*"
-    plugins: *plugins
+  - command: make buildkite_release
+    plugins:
+      thedyrt/git-commit#v0.3.0:
+        branch: release-${APP_VERSION}
+        create-branch: true
+        message: "Updated data [$APP_VERSION]"
+        remote: upstream
+        user:
+          name: ${BUILDKITE_BUILD_CREATOR}
+          email: ${BUILDKITE_BUILD_CREATOR_EMAIL}

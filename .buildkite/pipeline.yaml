@@ -31,3 +31,10 @@ steps:
       queue: default
     branches: "v*.*.*"
     plugins: *plugins
+
+  - trigger: sandbox-cluster-deploy
+    label: "create pull-request"
+    branches: "!master !v*"
+    build:
+      env:
+        APP_VERSION: ${BUILDKITE_TAG}
