@@ -10,9 +10,10 @@ steps:
       queue: sandbox
     plugins:
       thedyrt/git-commit#v0.3.0:
-        branch: release-${APP_VERSION}
+        branch: ${APP_VERSION}
         create-branch: true
-        message: "Updated data [$APP_VERSION]"
+        remote: origin
+        message: "Updated data ${APP_VERSION}"
         user:
           name: ${BUILDKITE_BUILD_CREATOR}
-          email: ${BUILDKITE_BUILD_CREATOR_EMAIL}
+          email: paulo.ancheta@gmail.com
