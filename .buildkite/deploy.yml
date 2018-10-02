@@ -6,6 +6,8 @@ plugins: &plugins
 
 steps:
   - command: make buildkite_release
+    agents:
+      queue: sandbox
     plugins:
       thedyrt/git-commit#v0.3.0:
         branch: release-${APP_VERSION}
