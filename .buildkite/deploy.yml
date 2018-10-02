@@ -6,12 +6,13 @@ plugins: &plugins
 
 steps:
   - command: make buildkite_release
+    agents:
+      queue: sandbox
     plugins:
       thedyrt/git-commit#v0.3.0:
         branch: release-${APP_VERSION}
         create-branch: true
         message: "Updated data [$APP_VERSION]"
-        remote: upstream
         user:
           name: ${BUILDKITE_BUILD_CREATOR}
           email: ${BUILDKITE_BUILD_CREATOR_EMAIL}
