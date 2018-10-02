@@ -28,13 +28,15 @@ steps:
       docker build . -t 894790724410.dkr.ecr.us-west-2.amazonaws.com/paulos-kube-test:${BUILDKITE_TAG}
       docker push 894790724410.dkr.ecr.us-west-2.amazonaws.com/paulos-kube-test
     agents:
-      queue: default
+      queue: sandbox
     branches: "v*.*.*"
     plugins: *plugins
 
   - trigger: sandbox-cluster-deploy
     label: "create pull-request"
     branches: "v*.*.*"
+    agents:
+      queue: sandbox
     build:
       env:
         APP_VERSION: ${BUILDKITE_TAG}
